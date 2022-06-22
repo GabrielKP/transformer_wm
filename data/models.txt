@@ -1,0 +1,10 @@
+# Models which run script will try to run
+# only supports comments at start of the line.
+distilgpt2
+# xlnet-base-cased
+gpt2
+gpt2-medium
+gpt2-large
+EleutherAI/gpt-neo-1.3B
+# too big for gpu
+# EleutherAI/gpt-j-6B

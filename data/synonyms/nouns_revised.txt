@@ -1,0 +1,134 @@
+-- section
+part
+passage
+paragraph
+chunk
+segment
+-- base
+floor
+ground
+foundation
+-- variation
+diversity
+deviation
+variety
+variance
+variability
+-- houses
+apartments
+homes
+mansions
+residences
+properties
+dwellings
+-- purposes
+objectives
+intentions
+functions
+aims
+goals
+motivations
+-- application
+-- chapter
+episode
+segment
+section
+part
+passage
+-- plains
+grasslands
+fields
+prairies
+spaces
+parklands
+-- intersections
+-- coat
+-- routes
+paths
+passages
+tracks
+-- celebrations
+jubilations
+festivities
+ceremonies
+commemorations
+-- passages
+texts
+paragraphs
+segments
+parts
+sections
+-- competition
+competitiveness
+challenge
+contest
+-- investigation
+analysis
+research
+examination
+inspection
+-- comments
+inputs
+remarks
+-- examples
+exemplars
+-- opponents
+adversaries
+detractors
+challengers
+opposers
+antagonists
+critics
+-- stack
+heap
+-- works
+efforts
+-- class
+collection
+-- basket
+collection
+-- ability
+capability
+capacity
+potential
+-- contributions
+additions
+inputs
+-- notes
+reports
+annotations
+records
+minutes
+-- organisms
+-- articles
+publications
+reports
+-- number
+amount
+quantity
+-- issue
+topic
+matter
+concern
+problem
+-- sections
+segments
+passages
+sectors
+-- actions
+activities
+-- rules
+regulations
+instructions
+guidelines
+-- finding
+discovery
+uncovering
+revelation
+identification
+-- manipulation
+handling
+control
+-- councillor
+representative
+delegate

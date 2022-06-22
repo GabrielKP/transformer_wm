@@ -1,0 +1,70 @@
+-- adds
+appends
+supplements
+-- contains
+accomodates	holds	has
+-- increases
+heightens	raises	magnifies	deepens	amplifies
+-- have
+possess	retain
+-- include
+comprise	cover	incorporate	hold	encompass	contain
+-- creates
+introduces	causes	establishes	raises
+-- includes
+contains	has	holds	incorporates
+-- shape
+form	mold
+-- illustrate
+constitute	symbolize	represent	describe	show
+-- has
+contains	includes	possesses	retains
+-- keep
+possess	have
+-- form
+constitute	are	comprise	represent
+-- portray
+represent	illustrate	describe	show	display	constitute
+-- demands
+postulates	requires	expects	stipulates
+-- possesses
+has
+-- reflect
+demonstrate	indicate	display	reveal	show
+-- persist
+remain	exist	survive
+-- retain
+possess	have	offer	present
+-- reaches
+passes	comes to	touches
+-- make
+reach	achieve	attain	win
+-- forms
+shapes	composes	constitutes
+-- indicates
+represents	reflects	portrays
+-- allows
+permits	supports	enables
+-- cause
+create	have	lead to
+-- indicate
+reveal	suggest	disclose
+-- reach
+arrive at	come to
+-- contain
+hold	consist of	include	comprise
+-- reflects
+represents	expresses	mirrors	shows
+-- remain
+stay
+-- constitute
+form	comprise	make	serve as
+-- possess
+have	retain
+-- represent
+symbolize
+-- shows
+displays	expresses	indicates	reveals	demonstrates
+-- requires
+demands	necessitates	entails	needs	takes
+-- becomes
