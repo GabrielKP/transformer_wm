@@ -139,7 +139,7 @@ def word_swap(
 def create_word_swap(
     vignettes_file: str = "data/vignettes/single.json",
     output_dir: str = "data/input/word_swap/",
-    n_ARB_word_swaps: int = 10,
+    n_ARB_word_swaps: int = 3,
     overwrite: bool = False,
 ) -> None:
     if os.path.exists(output_dir) and os.listdir(output_dir) and not overwrite:

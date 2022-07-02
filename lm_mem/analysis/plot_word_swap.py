@@ -19,6 +19,7 @@ def plot_word_swap(
     overwrite: bool = False,
     data_dir_word_swap: str = "data/output/word_swap",
     kind="bar",
+    old=False,
 ) -> None:
     """Plots data from set_size experiment."""
 
@@ -34,14 +35,25 @@ def plot_word_swap(
     elif not overwrite and os.path.exists(output_path):
         raise ValueError(f"Output file {output_path} already exists, use `-f` to overwrite.")
 
-    experiments_labels = [
-        ("rpt_noun", ("RPT", "noun")),
-        ("rpt_verb", ("RPT", "verb")),
-        ("syn_noun", ("SYN", "noun")),
-        ("syn_verb", ("SYN", "verb")),
-        ("arb_noun", ("ARB", "noun")),
-        ("arb_verb", ("ARB", "verb")),
-    ]
+    if old:
+        experiments_labels = [
+            ("rpt_noun", ("RPT_noun")),
+            ("rpt_verb", ("RPT_verb")),
+            ("syn_noun", ("SYN_noun")),
+            ("syn_verb", ("SYN_verb")),
+            ("arb_noun", ("ARB_noun")),
+            ("arb_verb", ("ARB_verb")),
+        ]
+
+    else:
+        experiments_labels = [
+            ("rpt_noun", ("RPT", "noun")),
+            ("rpt_verb", ("RPT", "verb")),
+            ("syn_noun", ("SYN", "noun")),
+            ("syn_verb", ("SYN", "verb")),
+            ("arb_noun", ("ARB", "noun")),
+            ("arb_verb", ("ARB", "verb")),
+        ]
 
     # 1. Read data and accumulate repeat surprisal values
     word_surprisal_df = get_df_across_models(
@@ -50,27 +62,45 @@ def plot_word_swap(
         experiments=experiments_labels,
         use_mean=use_mean,
     )
-    logger.info(
-        "Repeat Surprisal Values\n"
-        f'{word_surprisal_df.groupby(["condition", "subcondition"])["repeat surprisal"].aggregate(["mean", "median", "min", "max"])}'
-    )
 
-    # 2. plot
-    # plot_catplot(
-    #     plt,
-    #     word_surprisal_df,
-    #     # ymax=200,
-    # )
-    ax = plot_raincloud2(
-        hue="subcondition",
-        data=word_surprisal_df,
-        figsize=(10, 10),
-        font_scale=1.1,
-        ylim=260,
-    )
-    ax.get_legend().set_title("marked word")
-    plt.title("Recall of transformers for repeated, synonym and arbitrary word presentation.")
-    plt.tight_layout()
+    if old:
+        logger.info(
+            "Repeat Surprisal Values\n"
+            f'{word_surprisal_df.groupby(["condition"])["repeat surprisal"].aggregate(["mean", "median", "min", "max"])}'
+        )
+    else:
+        logger.info(
+            "Repeat Surprisal Values\n"
+            f'{word_surprisal_df.groupby(["condition", "subcondition"])["repeat surprisal"].aggregate(["mean", "median", "min", "max"])}'
+        )
+
+    if old:
+        # 2. plot
+        plt.title("Recall of transformers for repeated, synonym and arbitrary word presentation.")
+        ax = plot_catplot(
+            plt,
+            word_surprisal_df,
+            # ymax=200,
+            kind=kind,
+        )
+        # ax = plot_raincloud2(
+        #     hue="model",
+        #     data=word_surprisal_df,
+        #     figsize=(10, 10),
+        #     font_scale=1.1,
+        #     ylim=260,
+        # )
+    else:
+        ax = plot_raincloud2(
+            hue="subcondition",
+            data=word_surprisal_df,
+            figsize=(10, 10),
+            font_scale=1.1,
+            ylim=260,
+        )
+        ax.get_legend().set_title("marked word")
+        plt.title("Recall of transformers for repeated, synonym and arbitrary word presentation.")
+        plt.tight_layout()
     plt.savefig(output_path, dpi=300)
 
 
@@ -161,4 +191,5 @@ def get_df_across_models(
 
 
 if __name__ == "__main__":
-    plot_word_swap(overwrite=True, model_names=["gpt2"])
+    plot_word_swap(overwrite=True, model_names="all", old=True)
+    plot_word_swap(overwrite=True, model_names=["gpt2"], old=False)

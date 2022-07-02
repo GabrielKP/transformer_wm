@@ -42,7 +42,7 @@ def _collate(tokenizer: PreTrainedTokenizer, samples: List[Dict[str, str]]) -> B
 
 def ppl(model_name: str, batch_size: int):
     log.info(f"PPL COMPUTATION FOR {model_name}")
-    device = "gpu" if torch.cuda.is_available() else "cpu"
+    device = "cuda" if torch.cuda.is_available() else "cpu"
     log.info(f"Set device to {device}")
     log.info(f"Batch size: {batch_size}")
 

@@ -9,7 +9,7 @@
    id="svg29484"
    inkscape:version="1.2 (1:1.2+202206011326+fc4e4096c5)"
    sodipodi:docname="transformer_block.svg"
-   inkscape:export-filename="transformer_block.png"
+   inkscape:export-filename="transformer_block.pdf"
    inkscape:export-xdpi="300"
    inkscape:export-ydpi="300"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -28,8 +28,8 @@
      inkscape:document-units="mm"
      showgrid="false"
      inkscape:zoom="1.0242632"
-     inkscape:cx="-45.886642"
-     inkscape:cy="345.12613"
+     inkscape:cx="-45.886643"
+     inkscape:cy="502.3123"
      inkscape:window-width="2486"
      inkscape:window-height="1376"
      inkscape:window-x="0"
@@ -388,15 +388,15 @@
          inkscape:label="text"><tspan
            x="336.18017"
            y="873.4668"
-           id="tspan44291"><tspan
+           id="tspan2758"><tspan
              style="font-size:29.3333px"
-             id="tspan44289">Masked Multi-head
+             id="tspan2756">Masked Multi-head
 </tspan></tspan><tspan
            x="376.72114"
            y="918.4668"
-           id="tspan44295"><tspan
+           id="tspan2762"><tspan
              style="font-size:29.3333px"
-             id="tspan44293">self attention</tspan></tspan></text>
+             id="tspan2760">self attention</tspan></tspan></text>
     </g>
     <g
        id="g33536-7"
@@ -417,7 +417,7 @@
          inkscape:label="text"><tspan
            x="353.13672"
            y="873.4668"
-           id="tspan44297">Feed Forward</tspan></text>
+           id="tspan2764">Feed Forward</tspan></text>
     </g>
     <g
        id="g33698"

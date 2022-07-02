@@ -2,69 +2,150 @@
 appends
 supplements
 -- contains
-accomodates	holds	has
+accomodates
+holds
+has
 -- increases
-heightens	raises	magnifies	deepens	amplifies
+heightens
+raises
+magnifies
+deepens
+amplifies
 -- have
-possess	retain
+possess
+retain
 -- include
-comprise	cover	incorporate	hold	encompass	contain
+comprise
+cover
+incorporate
+hold
+encompass
+contain
 -- creates
-introduces	causes	establishes	raises
+introduces
+causes
+establishes
+raises
 -- includes
-contains	has	holds	incorporates
+contains
+has
+holds
+incorporates
 -- shape
-form	mold
+form
+mold
 -- illustrate
-constitute	symbolize	represent	describe	show
+constitute
+symbolize
+represent
+describe
+show
 -- has
-contains	includes	possesses	retains
+contains
+includes
+possesses
+retains
 -- keep
-possess	have
+possess
+have
 -- form
-constitute	are	comprise	represent
+constitute
+are
+comprise
+represent
 -- portray
-represent	illustrate	describe	show	display	constitute
+represent
+illustrate
+describe
+show
+display
+constitute
 -- demands
-postulates	requires	expects	stipulates
+postulates
+requires
+expects
+stipulates
 -- possesses
 has
 -- reflect
-demonstrate	indicate	display	reveal	show
+demonstrate
+indicate
+display
+reveal
+show
 -- persist
-remain	exist	survive
+remain
+exist
+survive
 -- retain
-possess	have	offer	present
+possess
+have
+offer
+present
 -- reaches
-passes	comes to	touches
+passes
+comes to
+touches
 -- make
-reach	achieve	attain	win
+reach
+achieve
+attain
+win
 -- forms
-shapes	composes	constitutes
+shapes
+composes
+constitutes
 -- indicates
-represents	reflects	portrays
+represents
+reflects
+portrays
 -- allows
-permits	supports	enables
+permits
+supports
+enables
 -- cause
-create	have	lead to
+create
+have
+lead to
 -- indicate
-reveal	suggest	disclose
+reveal
+suggest
+disclose
 -- reach
-arrive at	come to
+arrive at
+come to
 -- contain
-hold	consist of	include	comprise
+hold
+consist of
+include
+comprise
 -- reflects
-represents	expresses	mirrors	shows
--- remain
+represents
+expresses
+mirrors
+shows
+-- remains
 stay
 -- constitute
-form	comprise	make	serve as
+form
+comprise
+make
+serve as
 -- possess
-have	retain
+have
+retain
 -- represent
 symbolize
 -- shows
-displays	expresses	indicates	reveals	demonstrates
+displays
+expresses
+indicates
+reveals
+demonstrates
 -- requires
-demands	necessitates	entails	needs	takes
+demands
+necessitates
+entails
+needs
+takes
 -- becomes

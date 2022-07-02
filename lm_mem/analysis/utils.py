@@ -110,8 +110,8 @@ def get_repeat_surprisal_df_across_models(
 
         # in case that some experiments are missing use try and except
         try:
-            seq1_dfs.append(pd.read_csv(f"{data_dir_repeat}/repeats_{model_name}.csv"))
-            seq2_dfs.append(pd.read_csv(f"{data_dir_repeat}/controls_{model_name}.csv"))
+            seq1_dfs.append(pd.read_csv(f"{data_dir_repeat}/seq1s_{model_name}.csv"))
+            seq2_dfs.append(pd.read_csv(f"{data_dir_repeat}/seq2s_{model_name}.csv"))
             condition_names.append("repeat")
         except FileNotFoundError:
             logger.warning(f"Cannot find repeat experiment output for {model_name}")

@@ -3,8 +3,13 @@ import os
 import matplotlib.pyplot as plt
 
 from lm_mem import get_logger
-from lm_mem.analysis.plot import plot_boxplot, plot_catplot
-from lm_mem.analysis.utils import get_repeat_surprisal_df, get_repeat_surprisal_df_across_models
+from lm_mem.analysis.plot import plot_boxplot, plot_catplot, plot_raincloud, plot_raincloud2
+from lm_mem.analysis.utils import (
+    compute_repeat_surprisal,
+    get_df_across_models,
+    get_repeat_surprisal_df,
+    get_repeat_surprisal_df_across_models,
+)
 from lm_mem.data.reader import load_models
 
 logger = get_logger(__name__)
@@ -34,28 +39,36 @@ def plot_multiple(
         raise ValueError(f"Output file {output_path} already exists, use `-f` to overwrite.")
 
     # 1. Read data and accumulate repeat surprisal values
-    repeat_surprisal_df = get_repeat_surprisal_df_across_models(
+    repeat_surprisal_df = get_df_across_models(
         model_names=model_names,
-        data_dir_repeat=data_dir_repeat,
-        data_dir_paraphrase=data_dir_paraphrase,
-        data_dir_shuffle=data_dir_shuffle,
-        use_mean=use_mean,
+        experiments=["repeat"],
+        data_dir=data_dir_repeat,
+        compute_function=compute_repeat_surprisal,
     )
-    repeat_surprisal_df = get_repeat_surprisal_df_across_models(
-        model_names=model_names,
-        data_dir_repeat=data_dir_repeat,
-        data_dir_paraphrase="no",
-        data_dir_shuffle="no",
-        use_mean=use_mean,
-    )
+    # repeat_surprisal_df = get_repeat_surprisal_df_across_models(
+    #     model_names=model_names,
+    #     data_dir_repeat=data_dir_repeat,
+    #     data_dir_paraphrase="no",
+    #     data_dir_shuffle="no",
+    #     use_mean=use_mean,
+    # )
 
     # 2. plot
-    plot_catplot(
-        plt,
-        repeat_surprisal_df,
-        kind="bar",
+    # plot_catplot(
+    #     plt,
+    #     repeat_surprisal_df,
+    #     kind="bar",
+    # )
+    ax = plot_raincloud2(
+        data=repeat_surprisal_df,
+        figsize=(5, 7),
+        font_scale=1.1,
+        x="model",
     )
+    plt.title("Verbatim Recall of sentences in transformers")
+    plt.tight_layout()
     # plt.tight_layout()
+    logger.info(f"Saving to {output_path}")
     plt.savefig(output_path, dpi=300)
 
 
@@ -64,4 +77,9 @@ if __name__ == "__main__":
         overwrite=True,
         output_path="plots/repeat_surprisal_gpt2.png",
         model_names=["gpt2"],
+    )
+    plot_multiple(
+        overwrite=True,
+        output_path="plots/repeat_surprisal_all.png",
+        model_names="all",
     )
