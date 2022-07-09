@@ -8,10 +8,6 @@ isort           # import sorting
 flake8          # code analysis
 nbstripout      # remove output from jupyter notebooks
 
-# --------- testing --------- #
-pytest
-
 # --------- misc --------- #
 datasets        # sentence sampling
-ptitprince      # raincloudplots
-jupyterlab
+jupyterlab      # help for development

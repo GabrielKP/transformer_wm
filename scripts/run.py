@@ -5,23 +5,23 @@ import argparse
 import re
 from typing import Callable, Dict, List, Optional, Union
 
-from lm_mem import get_logger
-from lm_mem.analysis.paraphrase import (
+from transformer_wm import get_logger
+from transformer_wm.analysis.paraphrase import (
     plot_paraphrase,
     plot_same_vs_different_words,
     plot_shared_unshared_followsshared,
     plot_surprisal_by_length,
 )
-from lm_mem.analysis.plot_multiple import plot_multiple
-from lm_mem.analysis.plot_repeat import plot_repeat
-from lm_mem.analysis.set_size import plot_set_size
-from lm_mem.analysis.shuffle import plot_shuffle
-from lm_mem.data.create_repeat import create_repeat
-from lm_mem.data.create_repeat_predictions import create_repeat_predictions
-from lm_mem.data.create_word_swap import create_word_swap
-from lm_mem.data.reader import load_models
-from lm_mem.predictions_change import compute_predictions_change
-from lm_mem.surprisal import compute_surprisal, init_model_and_tokenizer
+from transformer_wm.analysis.plot_multiple import plot_multiple
+from transformer_wm.analysis.plot_repeat import plot_repeat
+from transformer_wm.analysis.set_size import plot_set_size
+from transformer_wm.analysis.shuffle import plot_shuffle
+from transformer_wm.data.create_repeat import create_repeat
+from transformer_wm.data.create_repeat_predictions import create_repeat_predictions
+from transformer_wm.data.create_word_swap import create_word_swap
+from transformer_wm.data.reader import load_models
+from transformer_wm.predictions_change import compute_predictions_change
+from transformer_wm.surprisal import compute_surprisal, init_model_and_tokenizer
 
 logger = get_logger(__name__)
 

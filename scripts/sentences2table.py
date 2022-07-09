@@ -1,4 +1,4 @@
-from lm_mem.data.nonce import get_correct_nonce_combinations
+from transformer_wm.data.nonce import get_correct_nonce_combinations
 
 contexts, nouns, verbs = get_correct_nonce_combinations(
     contexts_file="data/nonce/sentential_contexts.tsv",

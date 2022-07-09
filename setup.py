@@ -15,15 +15,15 @@ long_description = (here / "README.md").read_text(encoding="utf-8")
 # Fields marked as "Optional" may be commented out.
 
 setup(
-    name="lm_mem",
+    name="transformer_wm",
     version="0.0.1",
     description="Analyze sentential functional short term memory in language models.",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/GabrielKP/lm_mem",
+    url="https://github.com/GabrielKP/transformer_wm",
     author="Gabriel Kressin Palacios",
     author_email="gabriel.kressin@fu-berlin.de",
-    # license="MIT Licence",
+    license="MIT Licence",
     # For a list of valid classifiers, see https://pypi.org/classifiers/
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -33,10 +33,9 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3 :: Only",
     ],
-    keywords="lm, memory, senteces",
-    # package_dir={"": "lm_mem"},
+    keywords="lm, memory, senteces, working memory, wm, transformers,",
     packages=find_packages(),
-    python_requires=">=3.7",  # TODO: expand to other python versions.
+    python_requires=">=3.7",
     install_requires=[
         "dill",
         "nltk",
@@ -48,11 +47,13 @@ setup(
         "seaborn>=0.11.2",
         "wordfreq",
         "ptitprince",
+        "seaborn",
+        "ptitprince",
     ],
     extras_require={
         "jupyter": ["jupyterlab", "jupytext"],
     },
     project_urls={
-        "Source": "https://github.com/KristijanArmeni/neural-lm-mem",
+        "Source": "https://github.com/KristijanArmeni",
     },
 )
