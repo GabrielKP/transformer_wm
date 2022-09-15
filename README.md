@@ -1,17 +1,19 @@
-# Sentential
+# Repository: Working Memory for Repeated Sentences in Transformer Language Models
+
+This is the accompanying code repository for the the bachelor's thesis ['Working Memory for Repeated Sentences in Transformer Language Models'](pdf/kressin-2022-working_memory_for_repeated_sentences_in_transformer_language_models.pdf) by Gabriel Kressin Palacios.
+
+> **_NOTE:_** The original submitted thesis had the name 'Working Memory for Sentences in Transformer Language Models' which was unintentional and misleading. See [here](README.md#submitted-version).
 
 # Setup
 
-Install dependencies
-
 ```bash
 # clone project
-git clone https://github.com/GabrielKP/lm_mem
-cd lm_mem
+git clone https://github.com/GabrielKP/transformer_wm
+cd transformer_wm
 
 # [OPTIONAL] create conda environment
-conda create -n lm_mem python=3.9
-conda activate lm_mem
+conda create -n transformer_wm python=3.9
+conda activate transformer_wm
 
 # install pytorch according to instructions
 # https://pytorch.org/get-started/
@@ -29,10 +31,7 @@ pre-commit install
 pre-commit run --all-files
 ```
 
-
 # Run
-
-## At home
 
 ```bash
 # create input data
@@ -45,55 +44,11 @@ python scripts/run.py --batch_size 64
 python scripts/run.py --batch_size 64 --model_name gpt2
 ```
 
-## Cluster
+# Submitted version
 
-### Marcc
+The originally submitted thesis can be found in [pdf/kressin_original.pdf](pdf/kressin_original.pdf)
 
-Connect to [marcc](https://www.marcc.jhu.edu/getting-started/connecting-to-marcc/) and run experiment.
-* Enable multiplexing
-```bash
-# into .ssh/config
-Host marcc
-    Hostname login.marcc.jhu.edu
-    User userid@jhu.edu
-    ControlMaster auto
-    ControlPath ~/.ssh/control:%h:%p:%r
-```
-
-* Activate multiplexing
-```bash
-# only once per session
-ssh -fNM marcc -l userid@jhu.edu
-```
-
-* Connect to marcc
-```bash
-ssh marcc
-```
-
-* Close multiplexing (not required, but if you do not want it for some reason)
-```bash
-ssh -O stop marcc
-```
-
-* Setup conda environment
-```bash
-# Jokes on you, I forgot  how I did that
-```
-
-* Run experiment
-```bash
-# cd into project root dir
-
-# Open screen
-screen -S screenname
-
-# reconnect to screen
-screen -rd screenname
-
-# for interactive output run script:
-# gpt2
-./cluster/usrun.sh cluster/run.sh --device cuda --batch_size 64 --model_name gpt2
-# gpt-neo
-./cluster/usrun.sh cluster/run.sh --device cuda --batch_size 64 --model_name 'EleutherAI/gpt-neo-1.3B'
-```
+Changelog of the updated version to the original:
+* Added 'Repeated' in title.
+* Corrected matriculation number.
+* Corrected spelling in cover page.
