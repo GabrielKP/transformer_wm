@@ -380,7 +380,7 @@ def compute_surprisal(
         raise ValueError(f"Path {input_path} does not exist.")
     if os.path.isdir(input_path):
         if not os.path.exists(output_path):
-            os.mkdir(output_path)
+            os.makedirs(output_path)
         else:
             if not os.path.isdir(output_path):
                 raise ValueError(

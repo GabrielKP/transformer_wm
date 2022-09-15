@@ -13,7 +13,12 @@ from numpy.random import default_rng
 
 from transformer_wm import get_logger
 from transformer_wm.data.nonce import get_correct_nonce_combinations
-from transformer_wm.data.utils import compute_hash, read_vignettes, save_multiple_to_json, save_to_json
+from transformer_wm.data.utils import (
+    compute_hash,
+    read_vignettes,
+    save_multiple_to_json,
+    save_to_json,
+)
 
 logger = get_logger(__name__)
 

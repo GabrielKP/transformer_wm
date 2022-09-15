@@ -5,8 +5,16 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 from transformer_wm import get_logger
-from transformer_wm.analysis.plot import plot_boxplot, plot_catplot, plot_raincloud, plot_raincloud2
-from transformer_wm.analysis.utils import get_repeat_surprisal_df, get_repeat_surprisal_df_across_models
+from transformer_wm.analysis.plot import (
+    plot_boxplot,
+    plot_catplot,
+    plot_raincloud,
+    plot_raincloud2,
+)
+from transformer_wm.analysis.utils import (
+    get_repeat_surprisal_df,
+    get_repeat_surprisal_df_across_models,
+)
 from transformer_wm.data.reader import load_models
 
 logger = get_logger(__name__)
