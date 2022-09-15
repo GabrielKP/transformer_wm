@@ -29,6 +29,7 @@ logger = get_logger(__name__)
 def create_all_data():
     """Creates data for all experiments."""
     create_repeat(overwrite=True)
+    create_repeat(output_dir="data/input/repeat_50_seq2s", overwrite=True, n_seq2s=50)
     create_word_swap(overwrite=True)
     create_repeat_predictions(overwrite=True)
 

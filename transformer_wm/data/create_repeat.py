@@ -110,10 +110,17 @@ if __name__ == "__main__":
         action="store_true",
         help="If set, will overwrite existing content in output_dir.",
     )
+    parser.add_argument(
+        "--n_seq2s",
+        type=int,
+        default=10,
+        help="Number of controls.",
+    )
     args = parser.parse_args()
 
     create_repeat(
         args.vignettes_file,
         args.output_dir,
         overwrite=args.force,
+        n_seq2s=args.n_seq2s,
     )
