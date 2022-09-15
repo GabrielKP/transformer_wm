@@ -42,7 +42,7 @@ def single_experiment(
     current_model_name: str,
     function: Callable = compute_surprisal,
 ):
-    # try:
+    "wrapper to run a surprisal experiment"
     if sel_regex.match(regex_to_match):
         # Baseline experiment: Correct nonce data
         logger.info(f"Running {regex_to_match}-experiment for {current_model_name}")
@@ -51,16 +51,6 @@ def single_experiment(
             output_path=output_path,
             **function_kwargs,
         )
-
-
-# except Exception as err:
-#     logger.warning(
-#         f"Running {regex_to_match} Experiment for {current_model_name} failed:"
-#         + "\n"
-#         + str(err)
-#         + "\nContinuing"
-#     )
-#     logger.warning("\nContinuing")
 
 
 def run_everything(
@@ -169,6 +159,35 @@ def plot_everything(model_name):
             )
 
 
+def run_thesis(
+    batch_size: int = 24,
+    device: Optional[str] = None,
+):
+    """Replicates thesis results.
+
+    Parameters
+    ----------
+    batch_size : int, default=24
+        Determines batch size for model.
+    device : str, optional, default=`None`
+        torch device identifier (mostly `cuda` or `cpu`)
+    """
+
+    # 1. create the necessary data
+    create_all_data()
+
+    # 2. Run experiments
+    run_everything(
+        batch_size=batch_size,
+        model_name="all",
+        device=device,
+        selection=None,
+    )
+
+    # 3. Result analysis and plotting
+    plot_everything(model_name="all")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     subparsers = parser.add_subparsers(
@@ -176,11 +195,27 @@ if __name__ == "__main__":
         description="commands you can execute with the script",
     )
 
-    # Create subcommand
+    # ------------------ Thesis replication subcommand
+    parser_thesis = subparsers.add_parser("thesis")
+    parser_thesis.add_argument(
+        "--device",
+        type=str,
+        choices=["cpu", "cuda"],
+        help="Device program is run on (cpu/cuda)",
+    )
+    parser_thesis.add_argument(
+        "--batch_size",
+        type=int,
+        default=24,
+        help="Batch size for all experiments.",
+    )
+    parser_thesis.set_defaults(func=run_thesis)
+
+    # ------------------ Create subcommand
     parser_create = subparsers.add_parser("create")
     parser_create.set_defaults(func=create_all_data)
 
-    # Run subcommand
+    # ------------------ Run subcommand
     parser_run = subparsers.add_parser("run")
     parser_run.add_argument(
         "--device",
@@ -209,7 +244,7 @@ if __name__ == "__main__":
     )
     parser_run.set_defaults(func=run_everything)
 
-    # Plot subcommand
+    # ------------------ Plot subcommand
     parser_plot = subparsers.add_parser("plot")
     parser_plot.add_argument(
         "--model_name",
