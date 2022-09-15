@@ -1,0 +1,16 @@
+% !TeX encoding = UTF-8
+
+Language Models (LMs) trained to predict upcoming words in natural language texts are an essential tool in contemporary natural language processing (NLP) research.
+
+In particular, the transformer architecture introduced in 2017 has proven to be especially successful, and transformer LMs have become popular in almost every subdomain of NLP.
+Although the architectural features of transformers are determined by human design (e.g. the number of prior words they can access), the internal computations that they learn (e.g. how to use prior context to predict future words) are not well understood.
+We theorize that, because the next word prediction objective requires flexibly combining prior context, transformer LMs become functionally organized to possess a high-level mechanism akin to the psychological notion of working memory (WM). In other words, we hypothesize that they specify a limited subset of prior context which has special relevance, and that samples from this subset are  retrieved and manipulated to perform word prediction.
+
+
+In this thesis, we explore whether the transformer has WM-like capabilities by presenting them with multiple text sequences: a test sequence including the presentation of a sentence in context of the same sentence, and a control sequence including the presentation of the sentence in context of a random sentence.
+We propose four concept-models aimed at describing the computational operations of the WM-like capabilities we explore.
+Subsequently, we examine five pre-trained transformers -- distilGPT2, GPT2 base, GPT2-medium, GPT2-large and GPT-neo -- across three experiments.
+We find that during sentence repetition WM-like mechanisms of transformers are best approximated by a word-semantic-copy-paste mechanism, in which the transformer assigns the highest probabilities to a word and its synonyms, where the word is the exact continuation of the current context in the past.
+
+In conclusion, the thesis introduces a paradigm which allows for numerous experiments to test WM-like capabilities of LMs.
+This helps to characterize the algorithmic processes within transformers by drawing on concepts originating in human memory research.

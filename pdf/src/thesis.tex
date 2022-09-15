@@ -1,0 +1,83 @@
+% !TeX encoding = UTF-8
+
+%===============================================================================
+% Font options are:
+%   plain (default), serif (uses Palladio), sans-serif (uses Paratype Sans)
+%
+% Layout options are:
+%   article (default, no chapters), book (for longer texts, offers \chapter)
+%   Changing this value between LaTeX runs may require deleting the .aux files
+%
+% Paragraph options are:
+%   noparskip (default, no spacing between paragraphs), parskip (spaced)
+%
+% Language options are:
+%   de (default), en
+%   Changing this value between LaTeX runs may require deleting the .aux files
+%
+\documentclass[serif,article,noparskip,en]{agse-thesis}
+
+% Global parameters, replace with actual values.
+\newcommand{\thesisTitle}{Working Memory for Repeated Sentences in Transformer Language Models}
+% -> You may use \par (but not \\) to format the title. If you do so, you'll
+%    need to manually set the 'pdftitle' attribute below.
+\newcommand{\studentName}{Gabriel Arthur Daniel Kressin Palacios}
+%===============================================================================
+
+\hypersetup{pdftitle={\thesisTitle}}
+\hypersetup{pdfauthor={\studentName}}
+
+\addbibresource{references.bib}
+\addbibresource{references_manual.bib}
+
+% Blind texts, for demonstration only, not part of the actual template
+\usepackage{lipsum}
+
+\begin{document}
+
+\coverpage[
+    student/id=5114015,
+    student/mail=gabriel.kressin@fu-berlin.de,
+    thesis/type=Bachelor's thesis,            % optional, default: Bachelorarbeit
+    thesis/group={},
+                                           % optional, default: AGSE
+    thesis/advisor={Dr. Kristijan Armeni},           % optional
+    thesis/examiner={Prof. Dr. Christopher Honey},
+    thesis/examiner/2={Prof. Dr. Eirini Ntoutsi}, % optional
+    thesis/date=\today,                    % optional, default: \today
+    % title/size=\LARGE,      % set this value to overwrite automatic font size
+    abstract/separate,       % toggle this to move the abstract to its own page
+]
+{ % Your abstract here:
+    \input{0_abstract.tex}
+}
+
+\include{01_acknowledgement}
+
+\clearpage
+
+\include{001_declaration}
+
+\clearpage
+
+\tableofcontents
+
+\cleardoublepage
+
+\pagestyle{fancy}
+
+% Actual content starts here
+
+\input{1_introduction}
+\input{2_related_work}
+\input{3_methods}
+\input{4_experiments}
+\input{5_general_discussion}
+\input{6_conclusion}
+
+\printbibliography
+
+\appendix
+\include{7_appendix}
+
+\end{document}

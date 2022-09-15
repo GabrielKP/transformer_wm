@@ -1,0 +1,129 @@
+% !TeX encoding = UTF-8
+\section{Introduction}
+
+Language Models (LMs) are computational systems that predict an upcoming word based on previously seen words.
+Due to recent improvements to training infrastructure and the introduction of the transformer-architecture \parencite{vaswani_attention_2017}, LMs play an essential role in most subdomains of natural language processing (NLP) \parencite{devlin_bert_2019,brown_language_2020}.
+
+Although the architectural features of transformers are designed carefully by researchers and engineers, the conceptual operations of transformers are not well understood. % explain what is meant with conceptually, (why is it important)
+In terms of Marr's three levels \parencite{marr_vision_1982}, the computational level - the computation of an upcoming word based on prior words, and the hardware level - the organization of neurons in layers and the associated implementation are evident.
+In contrast, the algorithmic level for transformers is surrounded by mysticism, with some researchers even questioning whether it is possible to find \parencite{lillicrap_what_2019_correct}.
+The goal of this thesis is the partial characterization of the algorithmic level in terms of high level algorithmic descriptions.
+
+Hoping to further advance our knowledge of algorithmic operations in the algorithmic level, we theorize that the next word prediction objective during training functionally organizes the inner processes of transformers to develop the capacity to combine and use previous context in a short-term memory buffer, akin to the idea of Working Memory (WM) hypothesized to underpin important aspects of human intelligence.
+
+We propose four algorithmic concept-models aimed at describing how transformers retain and use past context during sentential repetition on a conceptual level: the indiscriminate, plain copy-paste, lexical-syntax copy-paste and lexical-semantic copy-paste concept-model.
+To differentiate between the concept-models, we use a paradigm where transformers process sequences in which sentences are repeated twice.
+Based on the first presentation of the sentence, we measure how the predictions during the second presentation are affected.
+Our goal is to measure how the occurrence of specific features and relationships in the first sentence affects the transformers predictions during the second presentation of the sentence.
+
+
+\subsection{Working Memory}
+
+In spoken and written language, the meaning of upcoming words is highly dependent on previous context.
+Subsequently, well working transformers are able to predict sets of potentially upcoming tokens with high accuracy.
+We propose that in the process of learning next-word prediction, transformers develop the capacity to use the information of previous tokens similar to  Working Memory described in psychology.
+
+\paragraph{Working Memory} In psychological and brain sciences it is a common hypothesis that WM is an essential process underpinning human thought and intelligence \parencite{baddeley_working_2003}.
+For instance, in the context of language it is essential to maintain and use representations of past words to understand and act in the future.
+However, the exact meaning of WM is contentious \parencite{cowan_many_2017}. For the purpose of this work, we refer to WM as:
+
+\begin{definition}
+    ``WM refers to a system, or a set of processes, holding mental representations temporarily available for use in thought and action.'' \parencite{oberauer_benchmarks_2018}
+\end{definition}
+
+\paragraph{functional Working Memory} We encourage the idea that it may be useful to describe parts of a transformers' inner processes as such a system, which allows for the combination and processing of previous words to predict the new word.
+Crucially, we want to highlight the process and abstract away from the underlying architecture. Hence, we introduce the notion of functional WM:
+
+\begin{definition}
+    Functional working memory (fWM) refers to a system, or a set of processes operating on sequential data, using past representations to perform a task.
+\end{definition}
+
+It is important to differentiate fWM from architectural WM: In the context of LMs, fWM refers to the process of using information from preceding words to predict an upcoming word.
+Accordingly, the underlying architecture does not require an explicit mechanism to hold and process representations of previous words:
+Although transformers have no architectural WM system, previous context influences their prediction of an upcoming word.
+Because a transformers' parameters are initialized randomly, this is a learned capacity: during training transformers learn to take previous tokens into account when predicting upcoming tokens, effectively developing a fWM capability.
+Conversely, recurrent neural networks (RNNs) \parencite{elman_finding_1990, mikolov_recurrent_2010} have an explicit architectural mechanism to keep track of previously seen tokens. This architectural bias naturally enforces the model to exhibit a fWM capability
+\footnote{Not considering the case in which the model learns to not use the hidden state vector.}.
+
+\paragraph{Long-term Memory vs fWM} Long-term memory refers to the persistent storage of information over a long period of time.
+In context of transformers, this refers to the parameters, which are learned during training and then kept unchanged.
+On the other hand, we refer to fWM to the effect in which an input is dynamically based on context combined to form an output.
+Although the parameters of the transformer are not changed during that process, it is still of major interest to understand how such a dynamical process operates in terms of a high-level description.
+
+
+\subsection{Testing fWM in Transformers}
+
+We intend to investigate the properties of fWM in transformers.
+In ongoing work Armeni et al. investigate the fWM of transformers by introducing a recall paradigm for lists of nouns inspired by the work on benchmarks for models of human WM \parencite{oberauer_benchmarks_2018}.
+We expand and adapt the paradigm to sentences.
+
+We present the transformer with two kinds of sequences, a Test-sequence and a Control-sequence.
+Both sequences contain a test-sentence placed at the end, and context prior to the test-sentence.
+For both sequences, during presentation of the test-sentence, we measure the transformers' surprisal for each word $w$ -- the degree to which the current word was unexpected by the transformer.
+This is done by presenting the transformer with the words in the context $w_1 , \dots , w_{n-1}$ and measuring the surprisal for the word $w_n$.
+Importantly, the Test-sequence's context stands, because of some feature, in a relationship with the test-sentence.
+On the contrary, the Control-sequence's context does not have this feature, and hence not the relationship with the test-sentence.
+
+If the transformers' fWM is able to use the feature of the context in the Test-sequence to predict the words of the test-sentence, a reduction of surprisal will be recorded.
+On the other hand, the lack of such a reduction at the test-sentence of the Control-sequence indicates that the context did not contain the information needed to increase the predictability of the test-sentence.
+Because we know that the context in the Control-sequence does not stand in relationship with the test-sentence, this demonstrates that the lack of this relationship leads to a lack of the predictability of the test-sentence.
+This rules out other sources of surprisal reduction which are not related to context, for example the unigram frequency of words within the test-sentence.
+We can then determine the relationships for which the transformer can use context to determine plausible high-level descriptions for the fWM of a transformer.
+For details, see section \ref{methods:paradigm}.
+
+
+\subsection{Concept-models of transformer fWM}
+
+To guide our investigation of fWM in transformers, we propose four concept-models as high-level descriptions of transformer fWM.
+Rather than looking at specific mechanisms of how the transformer implements fWM, we focus on a description based upon the transformers' behavior (i.e. output loss) in the context of sentential repetition.
+This way, we hope to create a high-level understanding of computational operations in transformers.
+
+On a conceptual level, a proper model of transformer fWM covers two processes:
+
+\paragraph{1. What information is encoded in fWM?} In order to use information from past context for prediction, it has to be determined which information is encoded.
+This process is highly context dependent.
+For instance, we may imagine a fWM which only during repetition of sentences will start to encode the previous section with most repeated words in current context.
+Another fWM might only encode a semantic gist of these words, but not the exact words.
+
+\paragraph{2. Which encoded information is used in fWM and how?} Encoded information can be put to use in different ways.
+For example, based on some encoded information, a model may predict similar syntactic structures, whilst another predicts semantically related words.
+
+\paragraph{} The answer to both questions does not need to be limited to one specific process.
+On the contrary, as the answers are highly dependent on the context in which the transformer is used, it is very likely that the characterization of transformer fWM by one process alone is insufficient.
+Instead, transformer fWM probably has to be characterized in terms of multiple processes working together.
+
+In the following, we describe four concept-models which may be plausible descriptions of transformer fWM operation during sentence repetition.
+On the basis of an input sequence of words $w_1, \dots, w_{n-1}$ a transformer predicts a probability distribution over all possible words $w_n$.
+The concept-models are formalized by specifying which input words are encoded and how this encoded information affects the probabilities for the words $w_n$.
+They mainly differ in the second process.
+For the rest of the thesis, we design experiments with the goal of finding an appropriate description of transformer fWM in terms of one or multiple concept-models.
+
+\begin{description}
+    \item[M0: Indiscriminate]\hfill \\
+        The simplest approach for transformer fWM is the decrease of surprise for any previous word in context. This is akin a  "bag of words" fWM-mechanism - any previously seen word will have a higher probability to be predicted.
+        Formally, given input $w_1, \dots, w_{n-1}$, increase the probability of prediction for all $w_n$ with $w_n \in \{w_1, \dots, w_{n-1}\}$.\\
+
+    \item[M1: Plain copy-paste]\hfill \\
+        The power of self-attention lies in its context dependency.
+        Hence, it is imaginable that the transformer takes the previous words dynamically into account depending on the current context.
+        A simple mechanism of such kind is copy-pasting: based on current context, performing verbatim repetition of the previously seen sequence of words.
+        Such a plain copy-paste mechanism jumps to the longest matching previous occurrence of the current context and predicts its next word.
+        Formally, given the input $w_1, \dots, w_{n-1}$ a plain copy-paste mechanism matches the largest possible current context $w_{n-i}, \dots, w_{n-1}$ word by word with the words of previous context $w_{t-i}, \dots, w_{t-1}$, where $i$ denotes the length of the match, $t$ denotes the position of the matched previous context, and $i < t < w$.
+        The plain copy-paste fWM then can encode this previous context $w_{t-i}, \dots, w_{t-1}$ together with its next word $w_t$. Subsequently, the prediction $w_n$ is expected to be the verbatim repetition $w_n = w_{t}$.\\
+
+    \item[M2: Lexical-Syntactic copy-paste]\hfill \\
+        We know that transformers can extract certain syntactic features from its input \parencite{rogers_primer_2020}.
+        Thus, a more sophisticated method would allow the transformer not only to predict \textit{verbatim} repetition, but instead to consider any other word, as long as it is within the same part-of-speech\footnote{part-of-speech (POS) refers to groups of words with similar grammatical roles. For example, in the sentence \textit{``I like spaceships''} the word \textit{like} is commonly classified in POS-category ``verb''.} (POS) category as the original next word derived from the previous context.
+        Formally, we introduce the function $\text{pos}(w)$ which maps words $w$ to their syntactic role.
+        Given the same encoding mechanism as M1, the fWM now assigns a word $w_n$ with $\text{pos}(w_n) = \text{pos}(w_{t})$ the highest probability as prediction.\\
+
+    \item[M3: Word-Semantic copy-paste]\hfill \\
+        This model is analogous to M2, but instead of allowing arbitrary syntactically appropriate words, it will only predict semantically similar words: synonyms that are contextually appropriate.
+        \sloppy Formally, we introduce the function $\text{syn}(w_t | w_{t-i}, \dots, w_{t-1})$ which maps word $w_t$ to its ``semantic category'' based on the given context $w_{t-i}, \dots, w_{t-1}$.
+        \sloppy Given the same encoding function as M1 and M2, the word-semantic fWM assigns the highest probabilities to words $w_n$ with $\text{syn}(w_n | w_{n-i}, \dots, w_{n-1}) = \text{syn}(w_t | w_{t-i}, \dots, w_{t-1})$.
+        This attribution of probabilities will not happen evenly across all synonyms, but it will be higher for synonyms the transformer deems more fitting.
+        In particular, the repeated word $w_t$ is a a great ``synonym'' to itself.
+
+\end{description}
+
+\newpage

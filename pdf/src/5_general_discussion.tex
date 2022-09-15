@@ -1,0 +1,68 @@
+\section{General Discussion}
+
+\paragraph{Transformers show the ability of verbatim recall for sentences.} As seen with the repeat surprisal flooring at $0\%$ of the repeat experiment \ref{ex:1_repeat_results}, transformers -- independently of parameters and training corpus size -- show verbatim recall of sentences.
+This generalizes the finding from Armeni et al. for noun-lists.
+These results show a clear effect of fWM in transformers: previous context dynamically affects predictions only if that context stands in relation with the prediction.
+In other words, the transformer has learned to store and retrieve sentences from context: part of the computational operations transformers can be described in terms of fWM.
+This allows us to focus on determining which high-level descriptions characterize transformer fWM.
+
+\paragraph{fWM of transformers during sentential repetition can be described by a a simple copy paste fWM which takes into account synonyms.}
+The results of all three experiments are most consistent with the word-semantic copy-paste fWM (outlined in M3).
+It describes a transformer fWM in which the longest possible previous context, which matches the  current context, is encoded and the probability for the word that followed the previous context is increased together with the probabilities for its synonyms.
+At the same time, the transformer fWM puts a strong emphasis on the verbatim repetition of the word that occurred in the past context.
+Because of that, transformer fWM is also well approximated by an even simpler copy-paste mechanism (outlined in M1) which only increases the probability for the repeated word in context and not the probability of synonyms into account.
+But importantly, in the SYN condition of the word-swap experiment \ref{ex:2_word_swap_results} -- where target words on which we measure the effects of repetition are swapped with synonyms -- the results show that transformer fWM shows recall for synonyms, especially for nouns.
+Furthermore, the cumulative probability change in experiment \ref{ex:3_prob_change_analysis} demonstrates directly that transformer fWM increases probabilities of words which are semantically related to the target word, albeit to a smaller extent than probabilities of exactly repeated words.
+All in all, this provides compelling evidence that the computational operations in transformer fWM are characterized by a word-semantic copy-paste fWM which puts a high emphasis on the verbatim repetition of the continued word of matched previous context, but clearly spreads the retrieval computation over the semantically related words (synonyms) as well.
+
+\paragraph{fWM effects are consistent across model and training corpus size.} The models investigated have vastly different numbers of parameters and are trained on different corpus sizes (Table \ref{Tab:models_used}).
+This is also reflected in their perplexity on the test-set of the wikitext103 dataset.
+Still, the transformer fWM effects are consistent. The lack of a significant difference e.g. in the SYN condition (target word swapped with a synonym) of the word swap experiment \ref{ex:2_word_swap_results} speaks towards our characterization of fWM being independent on architecture and training paradigm.
+
+\paragraph{} The main contribution of this thesis is the development of the paradigm in order to characterize high-level computational operations in transformers.
+This kind of understanding by using well-controlled behavioral paradigms to test how computational systems perform specific computations has a long history in human memory research \parencite{oberauer_benchmarks_2018}.
+In contemporary computer science, and natural language processing specifically, experimental and empirical work provides and important toolkit for understanding the content of learned model representations.
+But a growing body of work trying to understand transformers \parencite{rogers_primer_2020} demonstrates how hard it is to derive interpretable descriptions of these internal computational operations.
+We think it may prove fruitful for researchers in natural language processing and computational linguistics to adopt methodologies used by psychologists, neuroscientists and cognitive scientists such as Marr's three levels of explanation \parencite{marr_vision_1982}, or in this case the WM framework in human memory research \parencite{baddeley_working_2003}.
+By using the concept of functional Working Memory as an algorithmic description of transformer computations, we hope to give a glimpse into the possibilities of the approach.
+This paradigm still offers a multitude of possible experiments and ways to explore fWM in transformers.
+This possibly becomes even more interesting and relevant with improvements to transformers, as these improvements may allow for a more direct comparison to human WM.
+
+
+\subsection{Future Work}
+
+\paragraph{Concept-model refinement} For an improved matching of concept-model descriptions with the actual output of transformers a future continuation of this work could be the refinement of the concept-models.
+For example, current descriptions of concept-models only take into account the encoding of the exact match of previous words and its next word.
+It is a plausible alternative that not only this exact match is encoded, but also other words preceding the exact match.
+This could be tested with test-sentences which consist of exactly the same words right until the target word. This target word then is a homonym, a word with multiple meanings, but preserved spelling (e.g. ``bank'': ``river bank'' and ``bank'' as institution), in which the meaning only becomes discernible through the context after the target word.
+
+\paragraph{Additional experiments within the paradigm.} There are several interesting experimental setups to explore within this paradigm.
+For example, given multiple encoding sentences it would be interesting to investigate whether encoding-sentences compete for retrieval and which of the encoding-sentences would be preferred.
+Furthermore, it would be interesting to examine the effect of ``distracting'' words within the intervention.
+In addition, the effect of differences within the intervention and prefix, shuffling and ordering characteristics of sentences, and the effect of syntactic properties of sentences remain to be explored.
+Lastly, paraphrasing the encoding sentence to create a test-sentence which contains different words but retains the meaning of encoding-sentence, would allow to investigate the semantic encoding abilities of transformer fWM.
+Brief experiments show that the model indeed is less surprised if the encoding-sentence is a paraphrase, although this effect seems to be mediated by the amount of shared words between paraphrases as opposed to shared abstract meaning.
+Nevertheless, it would be interesting to characterize which levels of meaning the transformer fWM can capture in this ``repeated meaning'' experiment.
+
+\paragraph{Generalization to non-repeated sentences.} For a more general characterization of transformers fWM, it would be of major interest to investigate the fWM when the test-sentence is not a repetition of the encoding-sentence.
+For example, an experiment investigating fWM in such a manner could use textual entailment statements \parencite{dagan_pascal_2006}.
+Can a transformer encode the information from the \textit{premise} to be less surprised at the presentation of the \textit{hypothesis}?
+Compared of training a classifier for textual entailment, our paradigm would allow for a direct, non-fine-tuned analysis of transformer entailment performance, whilst providing the possibility for a more fine-grained analysis of results instead of only the usual three categories ``entailment'' or ``non-entailment''.
+Again, such experiments will become more relevant with the advances of transformer capacities:
+The effort to design such an experiment might not be worth it yet if it can be shown that current transformers use simple heuristics, like lexical overlap \parencite{mccoy_right_2019}.
+On the other hand, such an experiment has the potential to uncover the processes in transformers which would speak for employment of more fine-grained computational operations.
+
+\paragraph{Implementation of concept-models in transformer parameters} The algorithmic descriptions of transformer computations are detached from their implementational reality.
+Given that we are content with our computational-algorithmic description, an interesting line of work would be to ``reverse engineer'' the implementation of such an algorithmic description in terms of transformer parameters.
+This then may allow the attribution of certain roles to certain sets of parameters, which is an important aspect of understanding neural networks \parencite{mccloskey_networks_1991}.
+Furthermore, the initialization of a transformer with such a pattern might prove to be a useful strategy for reducing the pre-training time.
+
+\paragraph{Comparison of fWM to human WM.} The description of computational operations within transformers as fWM creates an avenue to compare the processes within transformers to processes within humans.
+For instance, it may be possible to compare transformers in our paradigm to WM in a set of WM benchmarks introduced by \textcite{oberauer_benchmarks_2018}.
+Such a comparison would be fruitful both for engineers as well as for psychologists, because it is thought that WM is an essential mechanism underpinning thought and higher cognition \parencite{baddeley_working_2003}.
+Hence, the comparison may reveal deciding aspects which distinguish transformer fWM and human WM.
+
+For example, the drop in recall performance with increased set size, is a benchmark finding that any model of human WM must account for \parencite{oberauer_benchmarks_2018}. Preliminary results show that transformers do not exhibit the set size effect during sentential repetition: in contrast to human WM, the performance of transformer fWM does not decrease with an increased set size.
+This points towards a fundamental difference in human WM and transformer fWM, and raises questions such as e.g. do transformers need more explicit representations for single items and sets?
+
+\newpage
