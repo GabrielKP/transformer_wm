@@ -61,9 +61,9 @@ python scripts/run.py plot
 ```
 
 You can invoke all scripts manually, they are located in:
-* data creation: transformer_wm/data
-* running the models: transformer_wm/surprisal.py
-* plotting/analysing: transformer_wm/analysis
+* data creation: [transformer_wm/data](transformer_wm/data)
+* running the models: [transformer_wm/surprisal.py](transformer_wm/surprisal.py)
+* plotting/analysing: [transformer_wm/analysis](transformer_wm/analysis)
 
 # Submitted version
 
