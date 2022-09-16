@@ -2,7 +2,7 @@
 
 This is the accompanying code repository for the the bachelor's thesis ['Working Memory for Repeated Sentences in Transformer Language Models'](pdf/kressin-2022-working_memory_for_repeated_sentences_in_transformer_language_models.pdf) by Gabriel Kressin Palacios.
 
-> **_NOTE:_** The original submitted thesis had the name 'Working Memory for Sentences in Transformer Language Models' which was unintentional and misleading. See [here](README.md#submitted-version).
+> **_NOTE:_** The original submitted thesis had the name 'Working Memory for Sentences in Transformer Language Models'. See [here](README.md#submitted-version).
 
 # Setup
 
