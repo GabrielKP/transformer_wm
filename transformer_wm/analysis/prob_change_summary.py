@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 
@@ -6,7 +8,7 @@ def rename(df: pd.DataFrame, col: str, old_name: str, new_name: str) -> pd.DataF
     return df
 
 
-def print_summary():
+def print_summary(output_dir=None):
     for pos in ["noun", "verb"]:
         print(f"%%%%%%%%%% {pos}")
         analysis_results = pd.read_csv(
@@ -28,24 +30,20 @@ def print_summary():
             .agg({"word": "count", "prob_change": "sum"})
             .transpose()
         )
+        if "intervention" in zs.columns:
+            zs["other"] = zs["other"] + zs["intervention"]
+            zs.drop("intervention", axis=1)
+
         zsf = pd.DataFrame()
         zsf[
             [
-                # "verbatim repetition",
-                # "semantically correct,_syntactically correct",
-                # "semantically correct,_syntactically incorrect",
-                # "semantically incorrect,_syntactically correct",
-                # "semantically incorrect,_syntactically incorrect",
-                # "other word within_internvention/prefix",
-                # "Other",
                 "verbatim repetition",
                 "semantically correct, syntactically correct",
                 "semantically correct, syntactically incorrect",
                 "semantically incorrect, syntactically correct",
                 "semantically incorrect, syntactically incorrect",
-                "other word within encoding sentence",
-                "other word within intervention",
-                "Other",
+                "position shifted word",
+                "other",
             ]
         ] = zs[
             [
@@ -55,7 +53,6 @@ def print_summary():
                 "semF_syn",
                 "semF_synF",
                 "upcoming_word",
-                "intervention",
                 "other",
             ]
         ]
@@ -64,7 +61,8 @@ def print_summary():
 
         print(zsf)
 
-        print(zsf.to_latex(f"table_{pos}.txt"))
+        if output_dir is not None:
+            zsf.to_csv(os.path.join(output_dir, f"prob_change_percentage_{pos}.csv"), index=True)
 
 
 if __name__ == "__main__":

@@ -1,5 +1,4 @@
 import argparse
-import logging
 import os
 
 import numpy as np
@@ -9,7 +8,6 @@ from matplotlib.patches import Rectangle
 
 from transformer_wm import get_logger
 from transformer_wm.analysis.plot import save_fig
-from transformer_wm.analysis.utils import get_repeat_surprisal_df
 
 logger = get_logger(__name__)
 

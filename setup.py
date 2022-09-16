@@ -44,7 +44,7 @@ setup(
         "tqdm",
         "transformers",
         "matplotlib",
-        "seaborn>=0.11.2",
+        "seaborn>=0.11.2,<0.12.0",
         "wordfreq",
         "ptitprince",
         "seaborn",

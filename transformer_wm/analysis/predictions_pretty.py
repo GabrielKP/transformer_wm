@@ -1,7 +1,6 @@
+import os
 from ast import literal_eval
-from functools import partial
 
-import numpy as np
 import pandas as pd
 
 NDIGITS = 4
@@ -17,7 +16,9 @@ def make_readable(cell):
     return f"{pword} {round(value, NDIGITS)}"
 
 
-def predictions_pretty(input_dir="data/output/repeat_predictions_change"):
+def predictions_pretty(
+    input_dir="data/output/repeat_predictions_change", output_dir="data/output/analysis/"
+):
     experiments = [
         "pred_change_repeat_verb_gpt2",
         "pred_change_repeat_noun_gpt2",
@@ -45,10 +46,10 @@ def predictions_pretty(input_dir="data/output/repeat_predictions_change"):
         preds_positive[columns] = preds_positive[columns].applymap(make_readable)
         preds_negative[columns] = preds_negative[columns].applymap(make_readable)
         preds_positive.to_csv(
-            f"data/output/analysis/pretty_positive_{experiment}.csv", index=False
+            os.path.join(output_dir, f"pretty_positive_{experiment}.csv"), index=False
         )
         preds_negative.to_csv(
-            f"data/output/analysis/pretty_negative_{experiment}.csv", index=False
+            os.path.join(output_dir, f"pretty_negative_{experiment}.csv"), index=False
         )
 
 

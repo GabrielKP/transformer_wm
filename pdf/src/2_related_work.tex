@@ -1,0 +1,32 @@
+% !TeX encoding = UTF-8
+\section{Related Work}
+
+\paragraph{Context in LSTMs} Efforts to understand the role of context have preceded the transformer-architecture: One of the most successful architectures was the Long-Short-Term-Memory (LSTM) \parencite{hochreiter_long_1997}. \textcite{linzen_assessing_2016} find that LSTM LMs can capture some grammatical dependencies such as subject-verb-agreement, but do not perform well without strong supervision. \textcite{khandelwal_sharp_2018} measure the effect of context ablations on language modeling accuracy. They truncate, replace and shuffle the context at different positions and find that LSTMs can use up to 200 tokens of context, for which only the order of the first 20 tokens matters.
+
+\paragraph{Context in Transformers} \cite{oconnor_what_2021} introduce the measure of \textit{usable information} in context, to measure the effect of fine grained lexical and structural ablations.
+They show that most of the used information by transformers lies in local ordering statistics and content carrying words across a long range.
+
+\paragraph{Interpretability of transformers} There is a considerable amount of publications concerned with understanding transformer function \parencite{rogers_primer_2020}.
+However, many studies focus on either diagnosing the extent of knowledge present, or probing for that information within internal transformer structures.
+In contrast, this thesis only considers model behavior, thus disregarding any internal theoretical information the model may have, but is not putting to use.
+
+\paragraph{Memory in Neural Networks} An important line of research concerning memory in neural network regards direct architectural integration of memory systems into neural networks.
+For example, \cite{nematzadeh_memory_2020} argue for an explicit separation of computation and storage via memory-modules, whilst others analyze, compare and augment transformers and other LMs with different memory architectures  \parencite{yogatama_memory_2022,tay_efficient_2022}.
+In this thesis such implementational mechanisms are not the focus, instead we examine context-dependent transformer behavior in terms of high-level descriptions independent of the underlying architecture.
+
+\paragraph{Computational heuristics of transformer function} \cite{mccoy_right_2019} diagnose why statistical models fail in certain cases of natural language inference. They show that the model's function can be described by three heuristics.
+In its essence, the heuristics are very similar to our concept-model:
+They serve to describe the model's context-based behavior with an approximate high-level description.
+The approach used by McCoy et al. make the value of such high-level descriptions evident: based on their heuristics the authors construct a dataset in which the models fail to perform spectacularly.
+
+\paragraph{WM of Transformers} In ongoing work Armeni et al. investigate the WM of transformers and LSTMs.
+They introduce a novel paradigm in which surprisal during presentation of repeated noun-lists is measured in order to determine transformer/LSTM recall.
+Armeni et al. find that transformers are able to retrieve word identity and position of words in noun lists.
+This performance is dependent on learned attention patterns, training corpus size and model depth.
+In this thesis, we expand and adapt the paradigm used by Armeni et al. to allow it to work with sentences, furthermore focusing on explanations for transformer behavior.
+
+\paragraph{} In contrast to previous studies we investigate the WM-like capabilities of transformers in order to understand them in terms of high-level computational principles.
+This differs vastly from determining how context contributes towards transformer prediction, as it offers -- albeit only for the domain of repeated sentences -- an understandable partial characterization of transformer function.
+Moreover, instead of focusing on the information theoretically available within the transformer, we explicitly only take the transformers' output based on the input into account. This shifts the focus to a more practical characterization of actual transformer performance (e.g. it is conceivable that internal word representations encode information the transformer might not be able to use for prediction).
+
+\newpage

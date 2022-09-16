@@ -12,7 +12,7 @@ logger = get_logger(__name__)
 
 
 def plot_surprisal_vs_nseq2(
-    data_dir: str = "data/output/repeat",
+    data_dir: str = "data/output/repeat_50_seq2s",
     output_dir: str = "plots",
     model_name: str = "gpt2",
     use_mean: bool = False,
@@ -21,8 +21,10 @@ def plot_surprisal_vs_nseq2(
 ) -> None:
 
     # 0. Make sure output files do not exist yet
-    surprisal_nseq2_path = os.path.join(output_dir, "surprisal_nseq2.png")
-    surprisal_nseq2_closeup_path = os.path.join(output_dir, "surprisal_nseq2_closeup.png")
+    surprisal_nseq2_path = os.path.join(output_dir, "influence_50_control_seqs_on_surprisal.png")
+    surprisal_nseq2_closeup_path = os.path.join(
+        output_dir, "influence_50_control_seqs_on_surprisal_closeup.png"
+    )
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     elif not overwrite and (
@@ -33,7 +35,7 @@ def plot_surprisal_vs_nseq2(
         )
 
     # 1. Read data
-    controls = pd.read_csv(f"{data_dir}/controls_{model_name}.csv")
+    controls = pd.read_csv(f"{data_dir}/seq2s_repeat_{model_name}.csv")
 
     # 2. get average surprisal for amount of controls
     # ASSUMES EVERY EXPERIMENT HAS THE SAME AMOUNT OF CONTROLS
@@ -81,7 +83,7 @@ def plot_surprisal_vs_nseq2(
 
 
 def plot_repeat_surprisal_vs_nseq2(
-    data_dir: str = "data/output/repeat",
+    data_dir: str = "data/output/repeat_50_seq2s",
     output_dir: str = "plots",
     model_name: str = "gpt2",
     use_mean: bool = False,
@@ -90,8 +92,12 @@ def plot_repeat_surprisal_vs_nseq2(
 ) -> None:
 
     # 0. Make sure output files do not exist yet
-    rsurprisal_nseq2_path = os.path.join(output_dir, "repeat_surprisal_nseq2.png")
-    rsurprisal_nseq2_closeup_path = os.path.join(output_dir, "repeat_surprisal_nseq2_closeup.png")
+    rsurprisal_nseq2_path = os.path.join(
+        output_dir, "influence_50_control_seqs_on_repeat_surprisal.png"
+    )
+    rsurprisal_nseq2_closeup_path = os.path.join(
+        output_dir, "influence_50_control_seqs_on_repeat_surprisal_closeup.png"
+    )
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     elif not overwrite and (
@@ -102,8 +108,8 @@ def plot_repeat_surprisal_vs_nseq2(
         )
 
     # 1. Read data
-    repeats = pd.read_csv(f"{data_dir}/repeats_{model_name}.csv")
-    controls = pd.read_csv(f"{data_dir}/controls_{model_name}.csv")
+    repeats = pd.read_csv(f"{data_dir}/seq1s_repeat_{model_name}.csv")
+    controls = pd.read_csv(f"{data_dir}/seq2s_repeat_{model_name}.csv")
 
     # 2. get average surprisal for amount of controls
     # ASSUMES EVERY EXPERIMENT HAS THE SAME AMOUNT OF CONTROLS

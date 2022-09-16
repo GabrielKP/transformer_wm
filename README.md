@@ -1,17 +1,19 @@
-# Sentential
+# Repository: Working Memory for Repeated Sentences in Transformer Language Models
+
+This is the accompanying code repository for the the bachelor's thesis ['Working Memory for Repeated Sentences in Transformer Language Models'](pdf/kressin-2022-working_memory_for_repeated_sentences_in_transformer_language_models.pdf) by Gabriel Kressin Palacios.
+
+> **_NOTE:_** The original submitted thesis had the name 'Working Memory for Sentences in Transformer Language Models'. See [here](README.md#submitted-version).
 
 # Setup
 
-Install dependencies
-
 ```bash
 # clone project
-git clone https://github.com/GabrielKP/lm_mem
-cd lm_mem
+git clone https://github.com/GabrielKP/transformer_wm
+cd transformer_wm
 
 # [OPTIONAL] create conda environment
-conda create -n lm_mem python=3.9
-conda activate lm_mem
+conda create -n transformer_wm python=3.9
+conda activate transformer_wm
 
 # install pytorch according to instructions
 # https://pytorch.org/get-started/
@@ -29,120 +31,45 @@ pre-commit install
 pre-commit run --all-files
 ```
 
-
 # Run
 
-## At home
+The [`scripts/run.py`](scripts/run.py) is the main interface for the experiments. It provides you with different commands:
+```bash
+usage: run.py [-h] {thesis,create,run,plot} ...
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
+You can combine any subcommand with -h, for example `run.py run -h`.
 
 ```bash
-# create input data
+
+# Compute data, replicate all figures, plots and table data from the thesis
+python scripts/run.py thesis
+
+# Run experiments, standard batch size is 24, this should allow for running gpt-neo-1.6 on a RTX 3080. Adjust properly for your machine.
+python scripts/run.py run --batch_size 64
+
+# Run only one model
+python scripts/run.py --batch_size 64 --model_name gpt2
+
+# Recreate the input data
 python scripts/run.py create
 
-# run all
-python scripts/run.py --batch_size 64
-
-# run gpt2
-python scripts/run.py --batch_size 64 --model_name gpt2
+# Recreate plots
+python scripts/run.py plot
 ```
 
-## Cluster
+You can invoke all scripts manually, they are located in:
+* data creation: [transformer_wm/data](transformer_wm/data)
+* running the models: [transformer_wm/surprisal.py](transformer_wm/surprisal.py)
+* plotting/analysing: [transformer_wm/analysis](transformer_wm/analysis)
 
-### Marcc
+# Submitted version
 
-Connect to [marcc](https://www.marcc.jhu.edu/getting-started/connecting-to-marcc/) and run experiment.
-* Enable multiplexing
-```bash
-# into .ssh/config
-Host marcc
-    Hostname login.marcc.jhu.edu
-    User userid@jhu.edu
-    ControlMaster auto
-    ControlPath ~/.ssh/control:%h:%p:%r
-```
+The originally submitted thesis can be found in [pdf/kressin_original.pdf](pdf/kressin_original.pdf)
 
-* Activate multiplexing
-```bash
-# only once per session
-ssh -fNM marcc -l userid@jhu.edu
-```
-
-* Connect to marcc
-```bash
-ssh marcc
-```
-
-* Close multiplexing (not required, but if you do not want it for some reason)
-```bash
-ssh -O stop marcc
-```
-
-* Setup conda environment
-```bash
-# Jokes on you, I forgot  how I did that
-```
-
-* Run experiment
-```bash
-# cd into project root dir
-
-# Open screen
-screen -S screenname
-
-# reconnect to screen
-screen -rd screenname
-
-# for interactive output run script:
-# gpt2
-./cluster/usrun.sh cluster/run.sh --device cuda --batch_size 64 --model_name gpt2
-# gpt-neo
-./cluster/usrun.sh cluster/run.sh --device cuda --batch_size 64 --model_name 'EleutherAI/gpt-neo-1.3B'
-```
-
-## Baseline experiment: nonce data
-
-Nonce data (small)
-```bash
-
-```
-
-## RNN
-
-Using the RNN requires downloaded trained RNN models from here:
-https://doi.org/10.5281/zenodo.3559340.
-Place the extracted models into a folder `rnn_models` in the root directory.
-
-Alternatively use following commands:
-```bash
-mkdir rnn_models
-cd rnn_models
-wget https://zenodo.org/record/3559340/files/LSTM_40m.tar.gz?download=1 -O LSTM_40m.tar.gz
-tar -xvzf LSTM_40.tar.gz
-cd ../
-python rnn/model2statedict.py rnn_models/LSTM_400_40m_a_10-d0.2.pt
-# or
-python rnn/model2statedict.py rnn_models
-```
-
-```
-python surprisal.py \
-    data/nonce/sentences_small.json \
-    data/vignettes_small.json \
-    data/rnn/nonce_surprisal_small.csv \
-    --debug \
-    --device cpu \
-    --model_name rnn \
-    --rnn_config_file data/rnn/config.json \
-    --rnn_weights_file ./../rnn_models/LSTM_400_40m_a_10-d0.2_statedict.pt
-```
-
-```
-python surprisal.py \
-    data/nonce/sentences_correct.json \
-    data/vignettes_small.json \
-    data/rnn/nonce_surprisal_correct.csv \
-    --debug \
-    --device cuda \
-    --model_name rnn \
-    --rnn_config_file data/rnn/config.json \
-    --rnn_weights_file ./../rnn_models/LSTM_400_40m_a_10-d0.2_statedict.pt
-```
+Changelog of the updated version to the original:
+* Added 'Repeated' in title.
+* Corrected matriculation number.
+* Corrected spelling in cover page.

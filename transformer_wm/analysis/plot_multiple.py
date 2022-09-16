@@ -3,7 +3,12 @@ import os
 import matplotlib.pyplot as plt
 
 from transformer_wm import get_logger
-from transformer_wm.analysis.plot import plot_boxplot, plot_catplot, plot_raincloud, plot_raincloud2
+from transformer_wm.analysis.plot import (
+    plot_boxplot,
+    plot_catplot,
+    plot_raincloud,
+    plot_raincloud2,
+)
 from transformer_wm.analysis.utils import (
     compute_repeat_surprisal,
     get_df_across_models,

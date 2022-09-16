@@ -1,6 +1,6 @@
 -e .
 
-seaborn>=0.11.2
+seaborn>=0.11.2,<0.12.0
 # --------- linters --------- #
 pre-commit      # hooks for applying linters on commit
 black           # code formatting
