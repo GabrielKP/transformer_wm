@@ -6,12 +6,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 from transformer_wm import get_logger
-from transformer_wm.analysis.plot import (
-    plot_raincloud,
-    plot_single_sequence_from_df,
-    plot_violin,
-    save_fig,
-)
+from transformer_wm.analysis.plot import plot_raincloud, plot_single_sequence_from_df, save_fig
 from transformer_wm.analysis.utils import get_repeat_surprisal_df
 
 logger = get_logger(__name__)
@@ -24,6 +19,7 @@ def plot_repeat(
     experimentID: int = 0,
     use_mean: bool = False,
     overwrite: bool = False,
+    skip_examples: bool = False,
 ) -> None:
     """Plots data from repeat experiment."""
 
@@ -46,15 +42,16 @@ def plot_repeat(
     controls = pd.read_csv(f"{data_dir}/seq2s_repeat_{model_name}.csv")
 
     # 2. Plot single sequence
-    repeat_experiment = repeats[repeats["experimentID"] == experimentID]
-    control_sequenceIDs = (
-        controls[controls["experimentID"] == experimentID]["sequenceID"].unique().tolist()
-    )
-    control_experiment = controls[controls["sequenceID"] == control_sequenceIDs[0]]
-    plot_single_sequence_from_df(plt, repeat_experiment, title="seq1")
-    save_fig(plt, single_repeat_path)
-    plot_single_sequence_from_df(plt, control_experiment, title="seq2")
-    save_fig(plt, single_repeat_control_path)
+    if not skip_examples:
+        repeat_experiment = repeats[repeats["experimentID"] == experimentID]
+        control_sequenceIDs = (
+            controls[controls["experimentID"] == experimentID]["sequenceID"].unique().tolist()
+        )
+        control_experiment = controls[controls["sequenceID"] == control_sequenceIDs[0]]
+        plot_single_sequence_from_df(plt, repeat_experiment, title="seq1")
+        save_fig(plt, single_repeat_path)
+        plot_single_sequence_from_df(plt, control_experiment, title="seq2")
+        save_fig(plt, single_repeat_control_path)
 
     # 3. plot violin plot
     rs_df = get_repeat_surprisal_df(
