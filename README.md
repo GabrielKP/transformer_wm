@@ -44,7 +44,7 @@ You can combine any subcommand with -h, for example `run.py run -h`.
 
 ```bash
 
-# Replicate all figures, plots and table data from the thesis
+# Compute data, replicate all figures, plots and table data from the thesis
 python scripts/run.py thesis
 
 # Run experiments, standard batch size is 24, this should allow for running gpt-neo-1.6 on a RTX 3080. Adjust properly for your machine.
@@ -53,7 +53,7 @@ python scripts/run.py run --batch_size 64
 # Run only one model
 python scripts/run.py --batch_size 64 --model_name gpt2
 
-# Recreate the data
+# Recreate the input data
 python scripts/run.py create
 
 # Recreate plots
