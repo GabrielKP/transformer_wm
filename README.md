@@ -33,16 +33,37 @@ pre-commit run --all-files
 
 # Run
 
+The [`scripts/run.py`](scripts/run.py) is the main interface for the experiments. It provides you with different commands:
 ```bash
-# create input data
+usage: run.py [-h] {thesis,create,run,plot} ...
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
+You can combine any subcommand with -h, for example `run.py run -h`.
+
+```bash
+
+# Replicate all figures, plots and table data from the thesis
+python scripts/run.py thesis
+
+# Run experiments, standard batch size is 24, this should allow for running gpt-neo-1.6 on a RTX 3080. Adjust properly for your machine.
+python scripts/run.py run --batch_size 64
+
+# Run only one model
+python scripts/run.py --batch_size 64 --model_name gpt2
+
+# Recreate the data
 python scripts/run.py create
 
-# run all
-python scripts/run.py --batch_size 64
-
-# run gpt2
-python scripts/run.py --batch_size 64 --model_name gpt2
+# Recreate plots
+python scripts/run.py plot
 ```
+
+You can invoke all scripts manually, they are located in:
+* data creation: transformer_wm/data
+* running the models: transformer_wm/surprisal.py
+* plotting/analysing: transformer_wm/analysis
 
 # Submitted version
 
