@@ -9,6 +9,10 @@ from transformer_wm import get_logger
 from transformer_wm.analysis.plot_example_sequence import plot_examples
 from transformer_wm.analysis.plot_multiple import plot_multiple
 from transformer_wm.analysis.plot_repeat import plot_repeat
+from transformer_wm.analysis.plot_surprisal_vs_nseq2 import (
+    plot_repeat_surprisal_vs_nseq2,
+    plot_surprisal_vs_nseq2,
+)
 from transformer_wm.analysis.plot_word_swap import plot_word_swap
 from transformer_wm.analysis.predictions_pretty import predictions_pretty
 from transformer_wm.analysis.prob_change_summary import print_summary
@@ -127,8 +131,8 @@ def plot_everything():
     print_summary(output_dir="plots/")
 
     # Appendix, Figure 7
-    # plot_surprisal_vs_nseq2(output_dir="plots/", model_name="gpt2", overwrite=True)
-    # plot_repeat_surprisal_vs_nseq2(output_dir="plots/", model_name="gpt2", overwrite=True)
+    plot_surprisal_vs_nseq2(output_dir="plots/", model_name="gpt2", overwrite=True)
+    plot_repeat_surprisal_vs_nseq2(output_dir="plots/", model_name="gpt2", overwrite=True)
 
     # Appendix, Figure 8
     plot_multiple(output_path="plots/repeat_across_transformers_plot.png", overwrite=True)
@@ -184,7 +188,7 @@ def run_thesis(
     )
 
     # 3. Result analysis and plotting
-    plot_everything(model_name="all")
+    plot_everything()
 
 
 if __name__ == "__main__":

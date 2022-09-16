@@ -11,9 +11,7 @@ def rename(df: pd.DataFrame, col: str, old_name: str, new_name: str) -> pd.DataF
 def print_summary(output_dir=None):
     for pos in ["noun", "verb"]:
         print(f"%%%%%%%%%% {pos}")
-        analysis_results = pd.read_csv(
-            f"data/output/prob_change_analysis/analysis_results_{pos}.csv"
-        )
+        analysis_results = pd.read_csv(f"data/prob_change_analysis/analysis_results_{pos}.csv")
         print("-- raw")
         # print(analysis_results.groupby("category")["word"].count())
         # print(analysis_results.groupby("category")["prob_change"].sum())

@@ -48,6 +48,7 @@ You can combine any subcommand with -h, for example `run.py run -h`.
 python scripts/run.py thesis
 
 # Run experiments, standard batch size is 24, this should allow for running gpt-neo-1.6 on a RTX 3080. Adjust properly for your machine.
+# Note, that you can get the output data online, to avoid recomuting, see section below
 python scripts/run.py run --batch_size 64
 
 # Run only one model
@@ -64,6 +65,21 @@ You can invoke all scripts manually, they are located in:
 * data creation: [transformer_wm/data](transformer_wm/data)
 * running the models: [transformer_wm/surprisal.py](transformer_wm/surprisal.py)
 * plotting/analysing: [transformer_wm/analysis](transformer_wm/analysis)
+
+# Download output data
+
+If you do not want to recompute the output data, you can download it separately, and extract the `output` folder into the `data` directory.
+
+```bash
+# Go to data dir
+cd data
+
+# Download
+wget https://raw.githubusercontent.com/GabrielKP/transformer_wm_output/main/output.zip
+
+# Unzip
+unzip output.zip
+```
 
 # Submitted version
 
